@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "first_name",
+  "column_break_ltoj",
   "last_name",
   "date_of_birth"
  ],
@@ -28,12 +29,21 @@
    "in_list_view": 1,
    "label": "Date Of Birth",
    "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ltoj",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-03-28 16:23:04.267291",
+ "links": [
+  {
+   "link_doctype": "Airplane Ticket",
+   "link_fieldname": "passenger"
+  }
+ ],
+ "modified": "2026-03-29 23:15:04.957166",
  "modified_by": "Administrator",
  "module": "Airplane Management",
  "name": "Flight Passenger",
