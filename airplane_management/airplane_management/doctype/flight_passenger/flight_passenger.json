@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "first_name",
+  "full_name",
   "column_break_ltoj",
   "last_name",
   "date_of_birth"
@@ -33,6 +34,11 @@
   {
    "fieldname": "column_break_ltoj",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
   }
  ],
  "grid_page_length": 50,
@@ -43,7 +49,7 @@
    "link_fieldname": "passenger"
   }
  ],
- "modified": "2026-03-29 23:15:04.957166",
+ "modified": "2026-03-31 22:47:07.878917",
  "modified_by": "Administrator",
  "module": "Airplane Management",
  "name": "Flight Passenger",
@@ -68,5 +74,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "first_name"
+ "title_field": "full_name"
 }

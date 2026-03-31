@@ -19,3 +19,30 @@ class AirplaneTicket(WebsiteGenerator):
 		key = f"{self.flight}-{source_code}-to-{dest_code}-"
 		# Generate sequence per  airplane + route
 		self.name = make_autoname(key + ".###")
+	
+
+	def validate(self):
+		self.remove_duplicate_add_ons()
+		self.get_total_amount()
+  
+	def remove_duplicate_add_ons(self):
+		unique = []
+		seen = set()
+		duplicates_removed = False
+
+		for row in self.add_ons:
+			if row.item not in seen:
+				unique.append(row)
+				seen.add(row.item)
+			else:
+				duplicates_removed = True
+
+		self.set("add_ons", unique)
+
+		if duplicates_removed:
+			frappe.msgprint("Duplicate Add-ons removed.")
+  
+	def get_total_amount(self):
+		total_add_ons = sum([row.amount for row in self.add_ons if row.amount])
+     
+		self.total_amount =  (self.flight_price or 0) + total_add_ons
