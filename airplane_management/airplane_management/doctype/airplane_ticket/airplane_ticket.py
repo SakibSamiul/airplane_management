@@ -25,6 +25,43 @@ class AirplaneTicket(WebsiteGenerator):
 		self.remove_duplicate_add_ons()
 		self.get_total_amount()
   
+	def before_insert(self):
+
+		# Get flight
+		flight = frappe.get_doc("Airplane Flight", self.flight)
+
+		# Get airplane
+		airplane = frappe.get_doc("Airplane", flight.airplane)
+
+		# Row range
+		max_rows = airplane.capacity
+
+		# Seat letters
+		seat_letters = ["A", "B", "C", "D", "E"]
+
+		# Already booked seats
+		booked_seats = frappe.get_all(
+			"Airplane Ticket",
+			filters={"flight": self.flight},
+			pluck="seat"
+		)
+
+		# Generate all seats
+		all_seats = [
+			f"{row}{letter}"
+			for row in range(1, max_rows + 1)
+			for letter in seat_letters
+		]
+
+		# Available seats
+		available_seats = list(set(all_seats) - set(booked_seats))
+
+		if not available_seats:
+			frappe.throw("No available seats for this flight.")
+
+		# Assign random seat
+		self.seat = random.choice(available_seats)
+  
 	def remove_duplicate_add_ons(self):
 		unique = []
 		seen = set()
